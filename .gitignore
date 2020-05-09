@@ -1,0 +1,39 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+#backend
+backend/target
+backend/.mvn
+backend/mvnw
+backend/mvnw.cmd
+
+#frontend
+frontend/dist
+frontend/tmp
+frontend/out-tsc
+frontend/node_modules
+
+# IDEs and editors
+.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+*.iml
+*.ipr
+*.iws
+*.jar
+
+# misc
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+npm-debug.log
+yarn-error.log
+testem.log
+/typings
+
+# System Files
+.DS_Store
+Thumbs.db
