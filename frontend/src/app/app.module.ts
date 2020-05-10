@@ -8,7 +8,7 @@ import {FileManagerModule} from "./main/dashboard/file-manager.module";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {FlexLayoutModule, FlexModule} from "@angular/flex-layout";
+import {TokenInterceptor} from "./auth/token.interceptor";
 
 @NgModule({
   declarations: [
@@ -26,6 +26,13 @@ import {FlexLayoutModule, FlexModule} from "@angular/flex-layout";
       AuthModule,
       FileManagerModule
     ],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

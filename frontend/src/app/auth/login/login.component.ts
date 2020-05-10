@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {AuthService} from "../service/auth.service";
 
 @Component({
   selector: 'login',
@@ -8,7 +9,8 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-  constructor( private formBuilder: FormBuilder,) { }
+  constructor( private formBuilder: FormBuilder,
+               private authService: AuthService) { }
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
@@ -17,5 +19,12 @@ export class LoginComponent implements OnInit {
     });
   }
   loginUser(): void {
+    this.authService.login(this.loginForm.value).subscribe(
+      res => {
+
+      }, error => {
+        console.log('error')
+      }
+    );
   }
 }
