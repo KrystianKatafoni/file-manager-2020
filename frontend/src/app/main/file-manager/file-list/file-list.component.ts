@@ -79,7 +79,7 @@ export class FileListComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   onSelect(selected: File): void {
-
+    console.log(selected);
     this.fileListService.selectedFileSubject.next(selected);
   }
   loadDocumentPage(): void {

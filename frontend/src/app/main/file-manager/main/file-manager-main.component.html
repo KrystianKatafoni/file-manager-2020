@@ -1,17 +1,27 @@
-<div class = "page">
-<mat-toolbar>
-  <img class="logo" src="assets/archive.svg"><span>File manager</span>
-  <span class="example-spacer"></span>
+<div class="page">
+  <div  fxLayout="column" fxLayoutAlign="center center">
+    <mat-toolbar>
+      <img class="logo" src="assets/archive.svg"><span>File manager</span>
+      <span class="example-spacer"></span>
 
-  <button mat-icon-button matTooltip="About">
-    <mat-icon>info</mat-icon>
-  </button>
+      <button mat-icon-button matTooltip="About">
+        <mat-icon>info</mat-icon>
+      </button>
 
-  <button mat-icon-button class="logout" matTooltip="Logout">
-    <mat-icon>power_settings_new</mat-icon>
-  </button>
-</mat-toolbar>
-<div class="content" fxLayout="column" fxLayoutAlign="center center" >
-  <file-list></file-list>
-</div>
+      <button mat-icon-button class="logout" matTooltip="Logout">
+        <mat-icon>power_settings_new</mat-icon>
+      </button>
+    </mat-toolbar>
+    <file-list class="content"></file-list>
+
+
+    <div *ngIf="selectedFile !== null" class="info-sidebar">
+      <div fxLayout="column" fxLayoutAlign="center center">
+          <h1 class="header">DETAILS</h1>
+          <p><b>File name: </b>{{selectedFile.name}}</p>
+          <p><b>Uploaded by:</b> {{selectedFile.createdBy}}</p>
+          <p><b>Upload date: </b>{{selectedFile.creationDate}}</p>
+      </div>
+    </div>
+  </div>
 </div>

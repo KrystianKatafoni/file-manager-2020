@@ -1,6 +1,5 @@
 .table-wrapper {
   width: 1200px;
-  height: 700px;
   margin-top: -40px;
 }
 .mat-table {
@@ -15,4 +14,7 @@
 }
 .mat-paginator {
   background-color: whitesmoke;
+}
+.selected {
+  background-color: gray;
 }
