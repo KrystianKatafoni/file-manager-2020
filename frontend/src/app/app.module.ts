@@ -4,11 +4,12 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {AuthModule} from "./auth/auth.module";
-import {FileManagerModule} from "./main/dashboard/file-manager.module";
+import {FileManagerModule} from "./main/file-manager/file-manager.module";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {TokenInterceptor} from "./auth/token.interceptor";
+import {FlexLayoutModule} from "@angular/flex-layout";
 
 @NgModule({
   declarations: [
@@ -21,7 +22,7 @@ import {TokenInterceptor} from "./auth/token.interceptor";
       ReactiveFormsModule,
       FormsModule,
       HttpClientModule,
-
+      FlexLayoutModule,
       //App module
       AuthModule,
       FileManagerModule

@@ -1,0 +1,18 @@
+.table-wrapper {
+  width: 1200px;
+  height: 700px;
+  margin-top: -40px;
+}
+.mat-table {
+  background-color: whitesmoke;
+  box-shadow: none;
+
+  .mat-row {
+    position: relative;
+    cursor: pointer;
+    min-height: 64px;
+  }
+}
+.mat-paginator {
+  background-color: whitesmoke;
+}

@@ -1,0 +1,36 @@
+<div class="table-wrapper">
+<mat-table mat-table #table [dataSource]="dataSource">
+  <ng-container matColumnDef="index">
+    <mat-header-cell *matHeaderCellDef> Index </mat-header-cell>
+    <mat-cell *matCellDef="let element; let i = index;">{{i+1}}</mat-cell>
+  </ng-container>
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+    <mat-cell *matCellDef="let row"> {{row.name}}</mat-cell>
+  </ng-container>
+
+
+  <!-- Owner Column -->
+  <ng-container matColumnDef="owner">
+    <mat-header-cell *matHeaderCellDef fxHide.xs>Owner</mat-header-cell>
+    <mat-cell *matCellDef="let row" fxHide.xs> {{row.createdBy}}</mat-cell>
+  </ng-container>
+
+  <!-- Created date Column -->
+  <ng-container matColumnDef="created">
+    <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Created</mat-header-cell>
+    <mat-cell *matCellDef="let row" fxHide fxShow.gt-md>{{row.creationDate | date: 'dd/MM/yyyy HH:mm'}}</mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"
+           (click)="onSelect(row)"
+           (dblclick)="onDoubleClick(row)"
+           [ngClass]="{'selected' : row == selected}"
+  >
+  </mat-row>
+</mat-table>
+<mat-paginator [length]="dataSource?.totalElements"
+               [pageSizeOptions]="[10, 20, 40]" showFirstLastButtons></mat-paginator>
+</div>
