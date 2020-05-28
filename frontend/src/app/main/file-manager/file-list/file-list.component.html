@@ -1,25 +1,29 @@
 <div class="table-wrapper">
-<mat-table mat-table #table [dataSource]="dataSource">
+<!--  <mat-form-field>
+    <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Filter">
+  </mat-form-field>-->
+<mat-table class="mat-elevation-z8" mat-table [dataSource]="dataSource" matSort matSortActive="name,owner,creationDate"
+           matSortDirection="asc" matSortDisableClear>
   <ng-container matColumnDef="index">
     <mat-header-cell *matHeaderCellDef> Index </mat-header-cell>
-    <mat-cell *matCellDef="let element; let i = index;">{{i+1}}</mat-cell>
+    <mat-cell *matCellDef="let element; let i = index;">{{ this.paginator.pageIndex == 0 ?  i+1 : 1+i + this.paginator.pageIndex * this.paginator.pageSize}}</mat-cell>
   </ng-container>
   <!-- Name Column -->
   <ng-container matColumnDef="name">
-    <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
     <mat-cell *matCellDef="let row"> {{row.name}}</mat-cell>
   </ng-container>
 
 
   <!-- Owner Column -->
   <ng-container matColumnDef="owner">
-    <mat-header-cell *matHeaderCellDef fxHide.xs>Owner</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef mat-sort-header fxHide.xs>Owner</mat-header-cell>
     <mat-cell *matCellDef="let row" fxHide.xs> {{row.createdBy}}</mat-cell>
   </ng-container>
 
   <!-- Created date Column -->
-  <ng-container matColumnDef="created">
-    <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-md>Created</mat-header-cell>
+  <ng-container matColumnDef="creationDate">
+    <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-md>Uploaded</mat-header-cell>
     <mat-cell *matCellDef="let row" fxHide fxShow.gt-md>{{row.creationDate | date: 'dd/MM/yyyy HH:mm'}}</mat-cell>
   </ng-container>
 

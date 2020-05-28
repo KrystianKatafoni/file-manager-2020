@@ -1,11 +1,12 @@
 import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {FileDataSource} from "../file-data-source";
 import {File} from "../file";
-import {Subject} from "rxjs";
+import {merge, Subject} from "rxjs";
 import {MatPaginator} from "@angular/material/paginator";
 import {FileListService} from "./file-list.service";
 import {FileManagerService} from "../file-manager.service";
 import {takeUntil, tap} from "rxjs/operators";
+import {MatSort} from "@angular/material/sort";
 
 @Component({
   selector: 'file-list',
@@ -15,10 +16,11 @@ import {takeUntil, tap} from "rxjs/operators";
 })
 export class FileListComponent implements OnInit, AfterViewInit, OnDestroy {
   dataSource: FileDataSource;
-  displayedColumns = ['index', 'name', 'owner', 'created'];
+  displayedColumns = ['index', 'name', 'owner', 'creationDate'];
   selected: File;
   private _unsubscribeAll: Subject<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
   constructor(
     private fileListService: FileListService,
     private fileManagerService: FileManagerService
@@ -46,10 +48,17 @@ export class FileListComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     );
   }
+
   ngAfterViewInit(): void {
-    this.paginator.page
+/*    this.paginator.page
       .pipe(
         takeUntil(this._unsubscribeAll),
+        tap(() => this.loadDocumentPage())
+      )
+      .subscribe();*/
+    this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
+    merge(this.sort.sortChange, this.paginator.page)
+      .pipe(
         tap(() => this.loadDocumentPage())
       )
       .subscribe();
@@ -85,7 +94,7 @@ export class FileListComponent implements OnInit, AfterViewInit, OnDestroy {
   loadDocumentPage(): void {
     this.dataSource.loadFiles(
       '',
-      'name,asc',
+      this.sort.active+','+this.sort.direction,
       this.paginator.pageIndex,
       this.paginator.pageSize);
   }
