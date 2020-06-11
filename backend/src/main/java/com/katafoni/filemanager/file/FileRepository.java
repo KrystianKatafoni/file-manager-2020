@@ -1,10 +1,12 @@
 package com.katafoni.filemanager.file;
 
 import com.katafoni.filemanager.security.user.User;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
-public interface FileRepository extends JpaRepository<FileEntity, Long> {
-    Page<FileEntity> findByOwner(User owner, Pageable pageable);
+import java.util.Optional;
+
+
+public interface FileRepository extends JpaRepository<FileEntity, Long>, JpaSpecificationExecutor<FileEntity> {
+    Optional<FileEntity> findByIdAndOwner(Long id, User owner);
 }

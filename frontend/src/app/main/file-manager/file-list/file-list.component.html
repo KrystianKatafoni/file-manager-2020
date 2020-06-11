@@ -1,40 +1,90 @@
 <div class="table-wrapper">
-<!--  <mat-form-field>
-    <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Filter">
-  </mat-form-field>-->
-<mat-table class="mat-elevation-z8" mat-table [dataSource]="dataSource" matSort matSortActive="name,owner,creationDate"
-           matSortDirection="asc" matSortDisableClear>
-  <ng-container matColumnDef="index">
-    <mat-header-cell *matHeaderCellDef> Index </mat-header-cell>
-    <mat-cell *matCellDef="let element; let i = index;">{{ this.paginator.pageIndex == 0 ?  i+1 : 1+i + this.paginator.pageIndex * this.paginator.pageSize}}</mat-cell>
-  </ng-container>
-  <!-- Name Column -->
-  <ng-container matColumnDef="name">
-    <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
-    <mat-cell *matCellDef="let row"> {{row.name}}</mat-cell>
-  </ng-container>
+  <div fxLayout="row" fxLayoutAlign="center center">
+    <div class="filter-content">
+      <mat-form-field>
+        <input matInput type="text" [(ngModel)]="filterValue" placeholder="Filter by name">
+      </mat-form-field>
+      <button mat-icon-button (click)="doFilter()">
+        <mat-icon>filter_alt</mat-icon>
+      </button>
+    </div>
+    <span class="example-spacer"></span>
+    <div>
+      <div fxLayout="row" fxLayoutAlign="center">
+        <div class="add-file">
+          <button mat-fab
+                  type="file"
+                  color="add"
+                  (click)="onUploadFile()">
+            <mat-icon>add</mat-icon>
+          </button>
+          <input type="file" #fileUpload id="fileUpload" name="fileUpload" style="display:none;" />
+        </div>
+        <div *ngIf="selected !== null" class="remove-file">
+          <button mat-fab
+
+                  color="remove"
+                  (click)="removefile()">
+            <mat-icon>remove</mat-icon>
+          </button>
+        </div>
+        <div *ngIf="selected !== null" class="download-file">
+          <button mat-fab
+                  color="download"
+                  (click)="downloadFile()">
+            <mat-icon>arrow_downward</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
-  <!-- Owner Column -->
-  <ng-container matColumnDef="owner">
-    <mat-header-cell *matHeaderCellDef mat-sort-header fxHide.xs>Owner</mat-header-cell>
-    <mat-cell *matCellDef="let row" fxHide.xs> {{row.createdBy}}</mat-cell>
-  </ng-container>
+  <mat-table class="mat-elevation-z8" mat-table [dataSource]="dataSource" matSort
+             matSortActive="name,owner,creationDate"
+             matSortDirection="asc" matSortDisableClear>
+    <ng-container matColumnDef="index">
+      <mat-header-cell *matHeaderCellDef> Index</mat-header-cell>
+      <mat-cell
+        *matCellDef="let element; let i = index;">{{ this.paginator.pageIndex == 0 ? i + 1 : 1 + i + this.paginator.pageIndex * this.paginator.pageSize}}</mat-cell>
+    </ng-container>
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.name}}</mat-cell>
+    </ng-container>
 
-  <!-- Created date Column -->
-  <ng-container matColumnDef="creationDate">
-    <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-md>Uploaded</mat-header-cell>
-    <mat-cell *matCellDef="let row" fxHide fxShow.gt-md>{{row.creationDate | date: 'dd/MM/yyyy HH:mm'}}</mat-cell>
-  </ng-container>
+    <!-- Extension Column -->
+    <ng-container matColumnDef="extension">
+      <mat-header-cell *matHeaderCellDef mat-sort-header fxHide.xs>Extension</mat-header-cell>
+      <mat-cell *matCellDef="let row" fxHide.xs> {{row.extension}}</mat-cell>
+    </ng-container>
+    <!-- Size Column -->
+    <ng-container matColumnDef="size">
+      <mat-header-cell *matHeaderCellDef mat-sort-header fxHide.xs>Size</mat-header-cell>
+      <mat-cell *matCellDef="let row" fxHide.xs> {{row.size | filesize}}</mat-cell>
+    </ng-container>
 
-  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: displayedColumns;"
-           (click)="onSelect(row)"
-           (dblclick)="onDoubleClick(row)"
-           [ngClass]="{'selected' : row == selected}"
-  >
-  </mat-row>
-</mat-table>
-<mat-paginator [length]="dataSource?.totalElements"
-               [pageSizeOptions]="[10, 20, 40]" showFirstLastButtons></mat-paginator>
+    <!-- Owner Column -->
+    <ng-container matColumnDef="owner">
+      <mat-header-cell *matHeaderCellDef mat-sort-header fxHide.xs>Owner</mat-header-cell>
+      <mat-cell *matCellDef="let row" fxHide.xs> {{row.createdBy}}</mat-cell>
+    </ng-container>
+
+    <!-- Created date Column -->
+    <ng-container matColumnDef="creationDate">
+      <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-md>Uploaded</mat-header-cell>
+      <mat-cell *matCellDef="let row" fxHide fxShow.gt-md>{{row.creationDate | date: 'dd/MM/yyyy HH:mm'}}</mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"
+             (click)="onSelect(row)"
+             (dblclick)="onDoubleClick(row)"
+             [ngClass]="{'selected' : row == selected}"
+    >
+    </mat-row>
+  </mat-table>
+  <mat-paginator [length]="dataSource?.totalElements"
+                 [pageSizeOptions]="[10, 20, 40]" showFirstLastButtons></mat-paginator>
 </div>

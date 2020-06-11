@@ -1,4 +1,4 @@
-package com.katafoni.filemanager.error;
+package com.katafoni.filemanager.exception.error;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

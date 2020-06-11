@@ -22,6 +22,8 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {FileManagerService} from "./file-manager.service";
 import {FileListService} from "./file-list/file-list.service";
 import {MatSortModule} from "@angular/material/sort";
+import {FormsModule} from "@angular/forms";
+import {NgxFilesizeModule} from "ngx-filesize";
 
 const routes: Routes = [
   { path: '', component: FileManagerMainComponent, canActivate: [AuthGuard]}
@@ -31,25 +33,27 @@ const routes: Routes = [
   exports: [
     RouterModule
   ],
-    imports: [
-        RouterModule.forChild(routes),
-        MatToolbarModule,
-        MatIconModule,
-        MatButtonModule,
-        MatTooltipModule,
-        MatPaginatorModule,
-        MatTableModule,
-        MatListModule,
-        MatFormFieldModule,
-        MatOptionModule,
-        MatSelectModule,
-        MatInputModule,
-        CommonModule,
-        FlexLayoutModule,
-        BrowserAnimationsModule,
-        MatSortModule
+  imports: [
+    RouterModule.forChild(routes),
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule,
+    MatTooltipModule,
+    MatPaginatorModule,
+    MatTableModule,
+    MatListModule,
+    MatFormFieldModule,
+    MatOptionModule,
+    MatSelectModule,
+    MatInputModule,
+    CommonModule,
+    FlexLayoutModule,
+    BrowserAnimationsModule,
+    MatSortModule,
+    FormsModule,
+    NgxFilesizeModule
 
-    ],
+  ],
   providers   : [
     FileManagerService,
     FileListService

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FileDataSource} from "../file-data-source";
 import {FileListService} from "../file-list/file-list.service";
-import {File} from "../file";
+import {FileInfo} from "../../../shared/file-info";
+import {AuthService} from "../../../auth/service/auth.service";
 
 @Component({
   selector: 'filemanager',
@@ -9,8 +10,9 @@ import {File} from "../file";
   styleUrls: ['./file-manager-main.component.scss']
 })
 export class FileManagerMainComponent implements OnInit {
-  selectedFile: File;
-  constructor(private fileListService: FileListService) { }
+  selectedFile: FileInfo;
+  constructor(private fileListService: FileListService,
+              private authService: AuthService) { }
 
   ngOnInit(): void {
     this.fileListService.selectedFileSubject.subscribe( selected => {
@@ -18,4 +20,7 @@ export class FileManagerMainComponent implements OnInit {
     })
   }
 
+  logout() {
+    this.authService.logout();
+  }
 }

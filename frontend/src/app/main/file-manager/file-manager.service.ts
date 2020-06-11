@@ -1,38 +1,48 @@
 import { Injectable } from '@angular/core';
 import {environment} from "../../../environments/environment";
-import {HttpClient, HttpParams} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {BehaviorSubject, Observable} from "rxjs";
-import {File} from "./file";
+
+import {FileInfo} from "../../shared/file-info";
+
 
 @Injectable()
 export class FileManagerService {
   endpoint = environment.endpointApi;
-  files: BehaviorSubject<Array<File>> = new BehaviorSubject([]);
+  files: BehaviorSubject<Array<FileInfo>> = new BehaviorSubject([]);
   constructor(private httpClient: HttpClient) { }
-  getFiles(filter: string, sort: string,
-               pageNumber: number, pageSize: number): Observable<File[]> {
+  getFilesInfo(sort: string,
+               pageNumber: number, pageSize: number, filteredName: string): Observable<FileInfo[]> {
 
-   return this.httpClient.get<File[]>(this.endpoint + '/files',
+   return this.httpClient.get<FileInfo[]>(this.endpoint + '/files',
       {
         params: new HttpParams()
           .set('sort', sort)
           .set('page', pageNumber.toString())
           .set('size', pageSize.toString())
+          .set('name', filteredName)
       });
+  }
+
+  getFile(id: number): Observable<any> {
+    const headers = new HttpHeaders();
+    headers.set('Content-Type', 'application/octet-stream');
+    const end = this.endpoint + '/files/'+id;
+    return this.httpClient.get<any>(end, {headers: headers,responseType: 'arraybuffer' as 'json'});
   }
 
   /**
    * Upload files
-   * @param file {File}
+   * @param file {FileInfo}
    */
   public uploadFile(file: File): Observable<any> {
     const formData = new FormData();
-    //formData.append('file', file);
+    formData.append('file', file);
     console.log('upload');
-    return this.httpClient.post<any>(`${this.endpoint}/documents`, formData);
+    return this.httpClient.post<any>(`${this.endpoint}/files`, formData);
   }
 
   public deleteFile(id: number): Observable<any> {
-    return this.httpClient.delete(this.endpoint + '/documents/' + id);
+    return this.httpClient.delete(this.endpoint + '/files/' + id);
   }
 }

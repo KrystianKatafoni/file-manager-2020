@@ -1,6 +1,10 @@
 .table-wrapper {
   width: 1200px;
-  margin-top: -40px;
+  background-color: whitesmoke;
+}
+.filter-content {
+  margin-left: 10px;
+
 }
 .mat-table {
   background-color: whitesmoke;
@@ -17,4 +21,34 @@
 }
 .selected {
   background-color: gray;
+}
+.example-spacer {
+  /* This fills the remaining space, by using flexbox.
+     Every toolbar row uses a flexbox row layout. */
+  flex: 1 1 auto;
+}
+
+.add-file {
+  margin-top: 10px;
+  margin-right: 10px;
+}
+.remove-file {
+  margin-top: 10px;
+  margin-right: 10px;
+}
+.download-file {
+  margin-top: 10px;
+  margin-right: 20px;
+}
+.mat-add {
+  background-color: #3C4252;
+  color: white;
+}
+.mat-remove {
+  background-color: #C5C6CB;
+  color: black;
+}
+.mat-download {
+  background-color: #C5C6CB;
+  color: black;
 }

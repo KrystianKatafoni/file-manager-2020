@@ -1,7 +1,7 @@
 package com.katafoni.filemanager.security.exception;
 
 
-import com.katafoni.filemanager.error.ApiError;
+import com.katafoni.filemanager.exception.error.ApiError;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

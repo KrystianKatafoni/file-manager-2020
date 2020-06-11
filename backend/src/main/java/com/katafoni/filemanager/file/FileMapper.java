@@ -1,12 +1,18 @@
 package com.katafoni.filemanager.file;
 
-import org.mapstruct.Mapper;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
 
 public interface FileMapper {
-    FileDto fileEntityToFileDto(FileEntity fileEntity);
+
+    FileInfoDto fileEntityToFileInfoDto(FileEntity fileEntity);
+
+    List<FileInfoDto> fileEntitiesToFileInfoDtos(List<FileEntity> fileEntities);
+
+    FileDto fileEntityAndFileBytesToFileDto(FileEntity fileEntity, byte[] file);
+
     FileEntity fileDtoToFileEntity(FileDto fileDto);
-    List<FileDto> fileEntitiesToFileDtos(List<FileEntity> fileEntities);
+
 }

@@ -12,7 +12,8 @@ public enum ApplicationUserRole {
 
     STANDARD_USER(Sets.newHashSet(ApplicationUserPermission.FILE_READ,
             ApplicationUserPermission.FILE_WRITE,
-            ApplicationUserPermission.FILE_DELETE));
+            ApplicationUserPermission.FILE_DELETE,
+            ApplicationUserPermission.FILEINFO_READ));
 
     private final Set<ApplicationUserPermission> permissions;
 

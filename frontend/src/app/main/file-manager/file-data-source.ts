@@ -1,11 +1,11 @@
 import {DataSource} from '@angular/cdk/collections';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {FileManagerService} from "./file-manager.service";
-import {File} from "./file";
+import {FileInfo} from "../../shared/file-info";
 
-export class FileDataSource implements DataSource<File> {
+export class FileDataSource implements DataSource<FileInfo> {
 
-    private filesSubject = new BehaviorSubject<File[]>([]);
+    private filesSubject = new BehaviorSubject<FileInfo[]>([]);
     public totalPages: number;
     public totalElements: number;
     /**
@@ -19,9 +19,8 @@ export class FileDataSource implements DataSource<File> {
     {
 
     }
-    loadFiles(filter: string, sort: string,
-                  pageNumber: number, pageSize: number): void {
-        this.fileManagerService.getFiles(filter, sort, pageNumber, pageSize)
+    loadFiles(sort: string, pageNumber: number, pageSize: number, filteredName: string): void {
+        this.fileManagerService.getFilesInfo(sort, pageNumber, pageSize, filteredName)
             .subscribe(documentPage => {
                 console.log(documentPage);
                 this.totalPages = documentPage['totalPages'];
@@ -35,7 +34,7 @@ export class FileDataSource implements DataSource<File> {
      *
      * @returns {Observable<any[]>}
      */
-    connect(): Observable<File[]>
+    connect(): Observable<FileInfo[]>
     {
         return this.filesSubject.asObservable();
     }
