@@ -2,7 +2,7 @@ package com.katafoni.filemanager.file.extension;
 
 
 import com.google.common.io.Files;
-import com.katafoni.filemanager.exception.FileHasIncorrectExtensionException;
+import com.katafoni.filemanager.file.exception.FileHasIncorrectExtensionException;
 import org.springframework.stereotype.Component;
 
 @Component

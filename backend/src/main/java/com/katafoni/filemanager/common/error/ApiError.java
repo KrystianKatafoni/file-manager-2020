@@ -1,4 +1,4 @@
-package com.katafoni.filemanager.exception.error;
+package com.katafoni.filemanager.common.error;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;

@@ -1,7 +1,6 @@
 package com.katafoni.filemanager.storage;
 
 
-import com.katafoni.filemanager.file.FileDto;
 import com.katafoni.filemanager.file.FileEntity;
 import com.katafoni.filemanager.storage.aws.AwsS3;
 import org.springframework.stereotype.Service;

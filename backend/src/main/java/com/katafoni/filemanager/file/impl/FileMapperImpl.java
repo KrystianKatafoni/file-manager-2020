@@ -1,7 +1,8 @@
 package com.katafoni.filemanager.file.impl;
 
 import com.katafoni.filemanager.file.*;
-import com.katafoni.filemanager.file.extension.AcceptableExtension;
+import com.katafoni.filemanager.file.dto.FileDto;
+import com.katafoni.filemanager.file.dto.FileInfoDto;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

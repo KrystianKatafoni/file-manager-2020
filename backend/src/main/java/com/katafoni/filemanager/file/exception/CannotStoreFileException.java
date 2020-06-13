@@ -1,4 +1,4 @@
-package com.katafoni.filemanager.exception;
+package com.katafoni.filemanager.file.exception;
 
 public class CannotStoreFileException extends RuntimeException {
     public CannotStoreFileException(String fileName) {

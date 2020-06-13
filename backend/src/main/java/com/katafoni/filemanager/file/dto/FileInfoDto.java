@@ -1,4 +1,4 @@
-package com.katafoni.filemanager.file;
+package com.katafoni.filemanager.file.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

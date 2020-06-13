@@ -11,6 +11,7 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatInputModule} from "@angular/material/input";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {FlexLayoutModule} from "@angular/flex-layout";
+import {CommonModule} from "@angular/common";
 
 
 const routes: Routes = [
@@ -20,18 +21,19 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [LoginComponent, SignupComponent],
-  imports: [
-    RouterModule.forRoot(routes),
-    MatFormFieldModule,
-    MatButtonModule,
-    MatCheckboxModule,
-    MatFormFieldModule,
-    MatIconModule,
-    MatInputModule,
-    MatSnackBarModule,
-    MatCardModule,
-    ReactiveFormsModule,
-    FlexLayoutModule
-  ]
+    imports: [
+        RouterModule.forRoot(routes),
+        MatFormFieldModule,
+        MatButtonModule,
+        MatCheckboxModule,
+        MatFormFieldModule,
+        MatIconModule,
+        MatInputModule,
+        MatSnackBarModule,
+        MatCardModule,
+        ReactiveFormsModule,
+        FlexLayoutModule,
+        CommonModule
+    ]
 })
 export class AuthModule { }

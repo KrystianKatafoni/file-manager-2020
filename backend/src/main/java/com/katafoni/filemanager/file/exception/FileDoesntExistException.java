@@ -1,4 +1,4 @@
-package com.katafoni.filemanager.exception;
+package com.katafoni.filemanager.file.exception;
 
 public class FileDoesntExistException extends RuntimeException{
     public FileDoesntExistException(String message) {

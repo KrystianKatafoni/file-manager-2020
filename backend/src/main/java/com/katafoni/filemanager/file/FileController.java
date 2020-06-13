@@ -1,13 +1,13 @@
 package com.katafoni.filemanager.file;
 
-import com.katafoni.filemanager.exception.FileHasIncorrectFormatException;
+import com.katafoni.filemanager.file.dto.FileInfoDto;
+import com.katafoni.filemanager.file.exception.FileHasIncorrectFormatException;
 import com.katafoni.filemanager.file.search.SearchCriteria;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

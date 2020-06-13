@@ -1,6 +1,7 @@
 package com.katafoni.filemanager.file;
 
-import org.springframework.web.multipart.MultipartFile;
+import com.katafoni.filemanager.file.dto.FileDto;
+import com.katafoni.filemanager.file.dto.FileInfoDto;
 
 import java.util.List;
 

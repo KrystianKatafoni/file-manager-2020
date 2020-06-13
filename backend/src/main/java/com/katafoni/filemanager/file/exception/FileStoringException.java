@@ -1,4 +1,4 @@
-package com.katafoni.filemanager.exception;
+package com.katafoni.filemanager.file.exception;
 
 public class FileStoringException extends RuntimeException{
     public FileStoringException(String message) {

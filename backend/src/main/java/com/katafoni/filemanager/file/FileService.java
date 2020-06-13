@@ -1,5 +1,6 @@
 package com.katafoni.filemanager.file;
 
+import com.katafoni.filemanager.file.dto.FileInfoDto;
 import com.katafoni.filemanager.file.search.SearchCriteria;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

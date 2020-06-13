@@ -1,7 +1,7 @@
 package com.katafoni.filemanager.file.extension;
 
 
-import com.katafoni.filemanager.exception.FileHasIncorrectExtensionException;
+import com.katafoni.filemanager.file.exception.FileHasIncorrectExtensionException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

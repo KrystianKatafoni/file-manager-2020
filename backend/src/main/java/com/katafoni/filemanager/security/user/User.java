@@ -28,20 +28,8 @@ public class User {
 
     @NotNull
     @NotEmpty
-    private String firstName;
-
-    @NotNull
-    @NotEmpty
-    private String lastName;
-
-    @NotNull
-    @NotEmpty
     @ValidEmail(message = "Email is not valid")
     private String email;
-
-    @NotNull
-    @NotEmpty
-    private String username;
 
     @NotNull
     @NotEmpty

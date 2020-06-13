@@ -19,20 +19,12 @@ public class UserDto {
 
     @NotNull
     @NotEmpty
-    private String firstName;
-
-    @NotNull
-    @NotEmpty
-    private String lastName;
-
-    @NotNull
-    @NotEmpty
     @ValidEmail
     private String email;
 
     @NotNull
     @NotEmpty
-    private String username;
+    private String registrationCode;
 
     @NotNull
     @NotEmpty

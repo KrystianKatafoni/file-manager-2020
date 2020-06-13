@@ -37,3 +37,4 @@ As a user I want view files so that I want to get information about each file - 
 
 As a user I want to download a specific file.
 
+As a administrator I want to manage acceptable extensions.

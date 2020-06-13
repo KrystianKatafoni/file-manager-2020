@@ -14,7 +14,6 @@ public abstract class UserMapperDecorator implements UserMapper  {
     public User userDtoToUser(UserDto userDto) {
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         User user = delegate.userDtoToUser(userDto);
-        user.setUsername(user.getUsername().toLowerCase());
         user.setEmail(user.getEmail().toLowerCase());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setAccountNonExpired(true);

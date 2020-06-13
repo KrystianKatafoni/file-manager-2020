@@ -1,7 +1,8 @@
 package com.katafoni.filemanager.file.impl;
 
 import com.google.common.io.Files;
-import com.katafoni.filemanager.exception.FileDoesntExistException;
+import com.katafoni.filemanager.file.dto.FileInfoDto;
+import com.katafoni.filemanager.file.exception.FileDoesntExistException;
 import com.katafoni.filemanager.file.*;
 import com.katafoni.filemanager.file.extension.AcceptableExtension;
 import com.katafoni.filemanager.file.extension.ExtensionExtractor;
@@ -70,7 +71,7 @@ public class FileServiceImpl implements FileService {
         AcceptableExtension acceptableExtension = this.extensionExtensionValidator.validate(extension);
 
         FileEntity fileEntity = FileEntity.builder()
-                .createdBy(user.getUsername())
+                .createdBy(user.getEmail())
                 .creationDate(LocalDateTime.now())
                 .extension(acceptableExtension)
                 .name(filename)
