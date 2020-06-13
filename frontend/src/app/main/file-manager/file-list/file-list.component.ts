@@ -122,7 +122,8 @@ export class FileListComponent implements OnInit, AfterViewInit, OnDestroy {
   downloadFile() {
     this.fileManagerService.getFile(this.selected.id).subscribe(result => {
       console.log(result);
-      var blob = new Blob([result], {type: "octet-stream"});
+      var blob = new Blob([result]
+        , {type: "octet-stream"});
       FileSaver.saveAs(blob, this.selected.name+"."+this.selected.extension);
     }, error => {
       console.log(error);
