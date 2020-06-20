@@ -1,7 +1,7 @@
 package com.katafoni.filemanager.file;
 
-import com.katafoni.filemanager.file.extension.AcceptableExtension;
-import com.katafoni.filemanager.security.user.User;
+import com.katafoni.filemanager.extension.ExtensionEntity;
+import com.katafoni.filemanager.common.security.user.UserEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,6 +16,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Table(name="file")
 public class FileEntity {
 
     @Id
@@ -30,7 +31,7 @@ public class FileEntity {
 
     @NotNull
     @ManyToOne
-    private AcceptableExtension extension;
+    private ExtensionEntity extension;
 
     private String url;
 
@@ -39,7 +40,7 @@ public class FileEntity {
 
     @ManyToOne
     @NotNull
-    private User owner;
+    private UserEntity owner;
 
     private String createdBy;
 

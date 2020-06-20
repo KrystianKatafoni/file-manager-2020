@@ -32,10 +32,10 @@ public class FileController {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     @PreAuthorize("hasAnyAuthority('fileinfo:read')")
-    public Page<FileInfoDto> getFilesMetadata(@RequestParam(required = false) String name,
-                                              @RequestParam(defaultValue = "0") int page,
-                                              @RequestParam(defaultValue = "10") int size,
-                                              @RequestParam(defaultValue = "name,asc") String sort) {
+    public Page<FileInfoDto> getFilesInformation(@RequestParam(required = false) String name,
+                                                 @RequestParam(defaultValue = "0") int page,
+                                                 @RequestParam(defaultValue = "10") int size,
+                                                 @RequestParam(defaultValue = "name,asc") String sort) {
 
         String[] sortParams = sort.split(",");
         Sort sortObj = sortParams.length == 2
@@ -48,7 +48,7 @@ public class FileController {
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    @PreAuthorize("hasAnyAuthority('file:read')")//todo poprawic uprawnienia
+    @PreAuthorize("hasAnyAuthority('file:read')")
     public ResponseEntity<byte[]> getFile(@NotNull @PathVariable Long id) {
 
         byte[] fileBytes = this.fileService.getFile(id);
@@ -61,19 +61,19 @@ public class FileController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    @PreAuthorize("hasAnyAuthority('file:write')")//todo poprawic uprawnienia
-    public void uploadFile(@NotNull @RequestParam("file") MultipartFile file) {
+    @PreAuthorize("hasAnyAuthority('file:write')")
+    public FileInfoDto uploadFile(@NotNull @RequestParam("file") MultipartFile file) {
         try {
             if(file.getBytes().length == 0) throw new FileHasIncorrectFormatException(file.getOriginalFilename());
         } catch (IOException e) {
             log.error("Cannot read file size");
         }
-        this.fileService.uploadFile(file);
+        return this.fileService.uploadFile(file);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    @PreAuthorize("hasAnyAuthority('file:delete')")//todo poprawic uprawnienia
+    @PreAuthorize("hasAnyAuthority('file:delete')")
     public void deleteFile(@NotNull @PathVariable Long id) {
         this.fileService.deleteFile(id);
     }

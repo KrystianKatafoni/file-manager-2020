@@ -1,16 +1,16 @@
 package com.katafoni.filemanager.file.impl;
 
 import com.google.common.io.Files;
+import com.katafoni.filemanager.common.security.user.UserEntity;
+import com.katafoni.filemanager.extension.ExtensionEntity;
 import com.katafoni.filemanager.file.dto.FileInfoDto;
 import com.katafoni.filemanager.file.exception.FileDoesntExistException;
 import com.katafoni.filemanager.file.*;
-import com.katafoni.filemanager.file.extension.AcceptableExtension;
-import com.katafoni.filemanager.file.extension.ExtensionExtractor;
-import com.katafoni.filemanager.file.extension.ExtensionValidator;
+import com.katafoni.filemanager.extension.util.ExtensionExtractor;
+import com.katafoni.filemanager.extension.util.ExtensionValidator;
 import com.katafoni.filemanager.file.search.FileSpecification;
 import com.katafoni.filemanager.file.search.SearchCriteria;
-import com.katafoni.filemanager.security.user.User;
-import com.katafoni.filemanager.security.user.UserService;
+import com.katafoni.filemanager.common.security.user.UserService;
 import com.katafoni.filemanager.storage.FileStorageResponse;
 import com.katafoni.filemanager.storage.FileStorageService;
 import org.springframework.data.domain.Page;
@@ -42,8 +42,8 @@ public class FileServiceImpl implements FileService {
 
     @Override
     public Page<FileInfoDto> getFilesInfo(SearchCriteria searchCriteria, Pageable pageable) {
-        User user = this.userService.getCurrentUser();
-        searchCriteria.setOwnerId(user.getId());
+        UserEntity userEntity = this.userService.getCurrentUser();
+        searchCriteria.setOwnerId(userEntity.getId());
         FileSpecification fileSpecification = new FileSpecification(searchCriteria);
         Page<FileEntity> files = this.fileRepository.findAll(fileSpecification, pageable);
         List<FileInfoDto> fileInfoDtos = this.fileMapper.fileEntitiesToFileInfoDtos(files.getContent());
@@ -52,30 +52,30 @@ public class FileServiceImpl implements FileService {
 
     @Override
     public byte[] getFile(Long id) {
-        User user = this.userService.getCurrentUser();
-        FileEntity file = this.fileRepository.findByIdAndOwner(id, user)
+        UserEntity userEntity = this.userService.getCurrentUser();
+        FileEntity file = this.fileRepository.findByIdAndOwner(id, userEntity)
                 .orElseThrow(() ->new FileDoesntExistException("File doesn't exist"));
         byte[] fileBytes = fileStorageService.get(file.getPath()+file.getName());
         return fileBytes;
     }
 
     @Override
-    public void uploadFile(MultipartFile file) {
+    public FileInfoDto uploadFile(MultipartFile file) {
 
-        User user = this.userService.getCurrentUser();
+        UserEntity userEntity = this.userService.getCurrentUser();
         String filenameWithExtension = file.getOriginalFilename();
         String filename = Files.getNameWithoutExtension(filenameWithExtension);
         String extension = this.extensionExtractor.extract(filenameWithExtension);
         long size = file.getSize();
 
-        AcceptableExtension acceptableExtension = this.extensionExtensionValidator.validate(extension);
+        ExtensionEntity extensionEntity = this.extensionExtensionValidator.validate(extension);
 
         FileEntity fileEntity = FileEntity.builder()
-                .createdBy(user.getEmail())
+                .createdBy(userEntity.getEmail())
                 .creationDate(LocalDateTime.now())
-                .extension(acceptableExtension)
+                .extension(extensionEntity)
                 .name(filename)
-                .owner(user)
+                .owner(userEntity)
                 .size(size)
                 .build();
 
@@ -83,8 +83,8 @@ public class FileServiceImpl implements FileService {
         fileEntity.setPath(response.getPath());
         fileEntity.setUrl(response.getUrl());
 
-        fileRepository.save(fileEntity);
-
+        FileEntity savedFile = fileRepository.save(fileEntity);
+        return this.fileMapper.fileEntityToFileInfoDto(savedFile);
     }
 
     @Override

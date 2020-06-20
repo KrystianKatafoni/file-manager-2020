@@ -1,0 +1,19 @@
+Verschlusselungsverfahren symmetrisch
+
+2. Was das bedeutet?
+
+3. Normalerweise werden die Daten unverschlusselt geschickt.
+
+4. Aber kann man symetrisch Verschlusselung verwenden.
+
+5. Originelle Daten werden mit symmetrisch Schlussel verschlusselt.  
+
+6. Nach Verschlusselung ist es nicht moglich ohne Symetrisch Schlussel diese Daten versthen.
+
+7. Die Daten werden per Internet ubertragen und sollen bei Empfanger landen.
+
+8. Die Empfanger muss gleich symetric Schlussel haben, um die Daten zu unverschlusseln.
+
+9. Nach der Unverschlusselung ist das Moglich die Daten abzulesen.
+
+10. Ein wichtig Information: Die symetrische Schlussel soll sicher aufgeheben werden. 

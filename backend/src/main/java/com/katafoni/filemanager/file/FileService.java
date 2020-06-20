@@ -9,6 +9,6 @@ import org.springframework.web.multipart.MultipartFile;
 public interface FileService {
     Page<FileInfoDto> getFilesInfo(SearchCriteria searchCriteria, Pageable pageable);
     byte[] getFile(Long id);
-    void uploadFile(MultipartFile file);
+    FileInfoDto uploadFile(MultipartFile file);
     void deleteFile(Long id);
 }
