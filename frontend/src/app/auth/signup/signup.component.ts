@@ -50,7 +50,7 @@ export class SignupComponent implements OnInit, OnDestroy {
         this.router.navigate(['login']);
         this.openSnackBar('User registered successfully', 'Success');
       }, error => {
-        this.openSnackBar('User not registered', 'Error');
+        this.openSnackBar( error.error.message,'Error');
       }
     );
   }

@@ -1,0 +1,30 @@
+<div class="create-dialog" fxLayout="column">
+  <div fxLayout="row" fxLayoutAlign="space-between">
+    <div class="left-side" fxLayout="column" fxLayoutAlign="center">
+      <div class="header-content"><span><mat-icon class="icon">attach_file</mat-icon></span><span
+        class="header-name"> Create extension</span></div>
+    </div>
+    <div class="right-side" fxLayout="column">
+      <button mat-icon-button
+              color="accent"
+              aria-label="Cancel"
+              (click)="close()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+
+  </div>
+  <div class="extension-form">
+    <form [formGroup]="extensionForm" (submit)="onSubmit()">
+      <mat-form-field appearance="outline">
+        <mat-label>Extension name</mat-label>
+        <input matInput placeholder="Insert extension name" formControlName="extension">
+        <mat-hint>Insert extension name</mat-hint>
+        <mat-error *ngIf="!extensionForm.controls['extension'].valid && extensionForm.controls['extension'].touched">
+          Extension name is required and minimum length is 2
+        </mat-error>
+      </mat-form-field>
+      <button class="submit" mat-raised-button color="primary" type="submit" [disabled]="!extensionForm.valid">Submit</button>
+    </form>
+  </div>
+</div>

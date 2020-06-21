@@ -7,15 +7,13 @@ import {TokenService} from "../service/token.service";
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate {
+export class MainAdminGuard implements CanActivate {
 
-  constructor(
-    public authService: AuthService,
-    public router: Router,
-    private tokenService: TokenService
-  ) { }
+  constructor(public authService: AuthService, public router: Router, private tokenService: TokenService) {
+  }
 
   canActivate(
+
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     if (this.tokenService.isRefreshTokenExpired() || !this.authService.isLoggedIn) {
@@ -23,7 +21,7 @@ export class AuthGuard implements CanActivate {
       this.router.navigate(['login']);
       return false;
     }
-    if(!this.authService.hasStandardUserRole()) {
+    if(!this.authService.hasAdministratorRole()) {
       this.router.navigate(['login']);
       return false;
     }

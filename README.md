@@ -23,6 +23,10 @@ This project was created for the completion of the Java course at the WSB Univer
 
 ## Use cases
 ![Use cases](/images/usecase.png)
+![Use cases](/images/admin_use_case.jpg)
+
+## Databse relations
+![Use cases](/images/database.png)
 
 ## User stories
 As a user I want to create new account in application.

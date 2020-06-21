@@ -53,12 +53,7 @@ export class FileListComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
-/*    this.paginator.page
-      .pipe(
-        takeUntil(this._unsubscribeAll),
-        tap(() => this.loadDocumentPage())
-      )
-      .subscribe();*/
+
     this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
     merge(this.sort.sortChange, this.paginator.page)
       .pipe(
@@ -138,7 +133,9 @@ export class FileListComponent implements OnInit, AfterViewInit, OnDestroy {
       this.loadDocumentPage();
       this.selected = null;
     }, error => {
-      console.log(error);
+      let snackBarRef = this.snackBar.open(error.error.message, 'UPLOAD',{
+        duration: 3000
+      });
     })
   }
 

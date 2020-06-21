@@ -1,0 +1,17 @@
+<div class="page">
+  <div  fxLayout="column" fxLayoutAlign="center center">
+    <mat-toolbar>
+      <img class="logo" src="assets/archive.svg"><span>File manager</span>
+      <span class="example-spacer"></span>
+
+      <button mat-icon-button matTooltip="About">
+        <mat-icon>info</mat-icon>
+      </button>
+
+      <button mat-icon-button class="logout" matTooltip="Logout" (click)="logout()">
+        <mat-icon>power_settings_new</mat-icon>
+      </button>
+    </mat-toolbar>
+    <extension-list class="content"></extension-list>
+  </div>
+</div>

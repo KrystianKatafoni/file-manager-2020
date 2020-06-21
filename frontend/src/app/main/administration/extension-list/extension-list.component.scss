@@ -1,0 +1,39 @@
+.table-wrapper {
+  width: 600px;
+  background-color: whitesmoke;
+}
+.filter-content {
+  margin-left: 10px;
+
+}
+.mat-table {
+  background-color: whitesmoke;
+  box-shadow: none;
+}
+
+.mat-paginator {
+  background-color: whitesmoke;
+}
+
+.example-spacer {
+  /* This fills the remaining space, by using flexbox.
+     Every toolbar row uses a flexbox row layout. */
+  flex: 1 1 auto;
+}
+
+.add-extension {
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+.mat-add {
+  background-color: #3C4252;
+  color: white;
+}
+
+.extension-enabled {
+  margin-left: 12px;
+}
+.delete-button {
+  color: red;
+}

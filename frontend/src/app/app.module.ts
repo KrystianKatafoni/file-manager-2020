@@ -10,6 +10,7 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {TokenInterceptor} from "./auth/token.interceptor";
 import {FlexLayoutModule} from "@angular/flex-layout";
+import {AdministrationModule} from "./main/administration/administration.module";
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import {FlexLayoutModule} from "@angular/flex-layout";
       FlexLayoutModule,
       //App module
       AuthModule,
-      FileManagerModule
+      FileManagerModule,
+      AdministrationModule
     ],
   providers: [
     {

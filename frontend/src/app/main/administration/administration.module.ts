@@ -1,14 +1,12 @@
-import { NgModule } from '@angular/core';
-import { FileManagerMainComponent } from './main/file-manager-main.component';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {RouterModule, Routes} from "@angular/router";
-import {AuthGuard} from "../../auth/guard/auth.guard";
+import {MainAdminComponent} from './main-admin/main-admin.component';
+import {MainAdminGuard} from "../../auth/guard/main-admin.guard";
 import {MatToolbarModule} from "@angular/material/toolbar";
-
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import {MatTooltipModule} from "@angular/material/tooltip";
-import { StatisticsComponent } from './statistics/statistics.component';
-import {FileListComponent} from "./file-list/file-list.component";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatTableModule} from "@angular/material/table";
 import {MatListModule} from "@angular/material/list";
@@ -16,25 +14,27 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatOptionModule} from "@angular/material/core";
 import {MatSelectModule} from "@angular/material/select";
 import {MatInputModule} from "@angular/material/input";
-import {CommonModule} from "@angular/common";
 import {FlexLayoutModule} from "@angular/flex-layout";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {FileManagerService} from "./file-manager.service";
-import {FileListService} from "./file-list/file-list.service";
 import {MatSortModule} from "@angular/material/sort";
-import {FormsModule} from "@angular/forms";
-import {NgxFilesizeModule} from "ngx-filesize";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { ExtensionListComponent } from './extension-list/extension-list.component';
+import {AdministrationService} from "./administration.service";
+import { CreateDialogComponent } from './create-dialog/create-dialog.component';
+import {MatCheckboxModule} from "@angular/material/checkbox";
+import {MatDialogModule} from "@angular/material/dialog";
+
 
 const routes: Routes = [
-  { path: 'management', component: FileManagerMainComponent, canActivate: [AuthGuard]},
-  { path: '', component: FileManagerMainComponent, canActivate: [AuthGuard]}
+  { path: 'administration', component: MainAdminComponent, canActivate: [MainAdminGuard]}
 ];
 @NgModule({
-  declarations: [FileManagerMainComponent, FileListComponent, StatisticsComponent],
+  declarations: [MainAdminComponent, ExtensionListComponent, CreateDialogComponent],
   exports: [
     RouterModule
   ],
   imports: [
+    CommonModule,
     RouterModule.forChild(routes),
     MatToolbarModule,
     MatIconModule,
@@ -52,14 +52,12 @@ const routes: Routes = [
     BrowserAnimationsModule,
     MatSortModule,
     FormsModule,
-    NgxFilesizeModule
-
+    MatCheckboxModule,
+    MatDialogModule,
+    ReactiveFormsModule
   ],
-  providers   : [
-    FileManagerService,
-    FileListService
-  ],
+  providers: [
+    AdministrationService
+  ]
 })
-export class FileManagerModule {
-
-}
+export class AdministrationModule { }

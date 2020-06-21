@@ -28,7 +28,15 @@ export class AuthService {
             tokens.accessToken = tokens.accessToken.replace('Bearer ', '');
             tokens.refreshToken = tokens.refreshToken.replace('Refresh ', '');
             this.doLoginUser(user.email, tokens);
-            this.router.navigate(['']);
+            this.tokenService.getRole();
+            if(this.hasAdministratorRole()){
+              this.router.navigate(['administration']);
+            }else if(this.hasStandardUserRole()) {
+              this.router.navigate(['management']);
+            }else {
+              this.router.navigate(['login']);
+            }
+
           }
         )
       );
@@ -81,5 +89,12 @@ export class AuthService {
           this.logout();
         }
       });
+  }
+  hasAdministratorRole(): boolean {
+    return this.tokenService.getRole().startsWith("ROLE_ADMINISTRATOR");
+  }
+
+  hasStandardUserRole(): boolean {
+    return this.tokenService.getRole().startsWith("ROLE_STANDARD_USER");
   }
 }

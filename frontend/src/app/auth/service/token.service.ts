@@ -45,4 +45,12 @@ export class TokenService {
     localStorage.removeItem(this.ACCESS_TOKEN);
     localStorage.removeItem(this.REFRESH_TOKEN);
   }
+
+  getRole(): string {
+    const token = this.jwtHelper.decodeToken(localStorage.getItem(this.ACCESS_TOKEN))
+    const authority = token.authorities.filter(function(row) {
+      return row.authority.startsWith('ROLE_');
+    })
+    return authority[0].authority;
+  }
 }
